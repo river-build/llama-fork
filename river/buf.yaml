@@ -1,0 +1,10 @@
+version: v2
+modules:
+    - path: protocol
+    - path: packages/proto
+breaking:
+    use:
+        - FILE
+lint:
+    use:
+        - DEFAULT

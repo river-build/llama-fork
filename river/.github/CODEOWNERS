@@ -1,0 +1,53 @@
+# https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners
+##
+## "Code Owners" is an unfortunate name, as we do not encourage "ownership"
+## of code per se.
+##
+## Please add your name here if you would like to be notified any time
+## a change is made in a particular file or folder.
+##
+## We do this to help individuals keep their mental model of the codebase
+## up to date, and to make sure everyone who wants to be part of the conversation
+## is automagically added to the it.
+##
+## We do not do this to create dictators, benevolent or otherwise.
+##
+## IMPORTANT - If you add yourself as a code owner, please take it upon yourself
+## to review code at minimum, at the beginning, and end, of each work day.
+## Please either comment, approve, request changes, or remove yourself as a reviewer.
+## The SLA on reviews is 24 hours. After 24 hours a PR without comments will be
+## considered defacto approved and can be committed. However feedback can come
+## at any time! We are an asynchronous team of imperfect humans. If anyone, code
+## owner or otherwise, comments on your code at any time, please assume the best
+## intentions and respond with care and consideration.
+##
+## To see reviews that are waiting for your attention,
+## please visit: https://github.com/river-build/river/pulls?q=is%3Apr+is%3Aopen+user-review-requested%3A%40me
+##
+
+# Order is important; the last matching pattern takes the most
+# precedence. 
+
+/*.* @brianathere @texuf
+/.github/ @mechanical-turk
+/.github/CODEOWNERS @brianathere @sergekh2 @texuf
+/.vscode/ @texuf
+/.yarn/ @brianathere
+/assets/ @texuf
+/contracts/ @pfives @giuseppecrj @brianathere @jterzis
+/contracts/src/node-network/ @pfives @giuseppecrj @mechanical-turk
+/core/ @sergekh2
+/core/node/ @sergekh2 @bas-vk
+/core/node/events/ @sergekh2 @texuf
+/core/node/protocol/ @sergekh2 @texuf
+/core/node/protocol_extensions/ @sergekh2 @texuf
+/core/node/rules/ @sergekh2 @texuf
+/core/xchain/ @sergekh2 @bas-vk @clemire @brianathere
+/infra/ @mechanical-turk
+/packages/ @sergekh2 @texuf
+/packages/addresses/ @sergekh2 @texuf @giuseppecrj
+/packages/generated/ @sergekh2 @texuf @giuseppecrj
+/packages/sdk/ @sergekh2 @texuf @erikolsson
+/protocol/ @sergekh2 @texuf
+/scripts/ @texuf
+turbo.json @mechanical-turk

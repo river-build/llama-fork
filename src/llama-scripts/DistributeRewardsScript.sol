@@ -20,7 +20,7 @@ contract DistributeRewardsScriptBase is LlamaBaseScript {
   IRegistryDiamond internal constant REGISTRY_DIAMOND = IRegistryDiamond(0x7c0422b31401C936172C897802CF0373B35B7698);
 
   /// @dev The Treasury Llama account address.
-  LlamaAccount internal constant RIVER_TREASURY = LlamaAccount(payable(0x8ee48C016b932A69779A25133b53F0fFf66C85C0));
+  LlamaAccount public constant RIVER_TREASURY = LlamaAccount(payable(0x8ee48C016b932A69779A25133b53F0fFf66C85C0));
 
   /// @dev The RVR ERC20 token address.
   IERC20 internal constant RVR_TOKEN = IERC20(0x9172852305F32819469bf38A3772f29361d7b768);

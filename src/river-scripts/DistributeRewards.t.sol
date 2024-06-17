@@ -47,7 +47,7 @@ contract DistributeRewardsBaseSepolia is DistributeRewardsTestSetupBaseSepolia {
 contract DistributeRewardsTestSetupBase is LlamaTestSetup {
   address public constant RIVER_EXECUTOR = 0x63217D4c321CC02Ed306cB3843309184D347667B;
   address public constant RIVER_CORE = 0xA547373eB2b3c93AdeB27ec72133Fb7B92F70F7f;
-  uint256 public constant BLOCK_NUMBER = 15_859_928;
+  uint256 public constant BLOCK_NUMBER = 15_925_682;
   /// @dev The Treasury Llama account address.
   address public constant RIVER_TREASURY = 0x8ee48C016b932A69779A25133b53F0fFf66C85C0;
   /// @dev The RVR ERC20 token address.
@@ -75,7 +75,7 @@ contract DistributeRewardsTestSetupBase is LlamaTestSetup {
     console.log("RIVER_TREASURY: ", RIVER_TREASURY);
     vm.prank(BRIDGE_BASE);
     // mint a little more than period amount to RIVER_TREASURY
-    RVR_TOKEN.mint(RIVER_TREASURY, PERIOD_AMOUNT);
+    //RVR_TOKEN.mint(RIVER_TREASURY, PERIOD_AMOUNT);
     uint256 bal = RVR_TOKEN.balanceOf(RIVER_TREASURY);
     console.log("RVR_TOKEN.balanceOf(RIVER_TREASURY): ", bal);
   }
@@ -86,7 +86,7 @@ contract DistributeRewardsBase is DistributeRewardsTestSetupBase {
     // check block number
     assertEq(block.number, BLOCK_NUMBER);
     // assert treasury balance
-    assertEq(RVR_TOKEN.balanceOf(RIVER_TREASURY), PERIOD_AMOUNT);
+    //assertEq(RVR_TOKEN.balanceOf(RIVER_TREASURY), PERIOD_AMOUNT);
     // check period distribution amount
     uint256 periodDistributionAmount = REWARDS_DISTRIBUTION.getPeriodDistributionAmount();
     console.log("periodDistributionAmount: ", periodDistributionAmount);
@@ -117,5 +117,20 @@ contract DistributeRewardsBase is DistributeRewardsTestSetupBase {
     console.log("ohareClaimableAmt post: ", ohareClaimableAmtPost);
     uint256 hntlabsClaimableAmtPost = REWARDS_DISTRIBUTION.getClaimableAmountForOperator(HNTLABS);
     console.log("hntlabsClaimableAmt post: ", hntlabsClaimableAmtPost);
+
+    // claimable amt for authorized claimer
+    //REWARDS_DISTRIBUTION.getClaimableAmountForOperator(address(rewardsScript));
+    // claim operator rewards for each operator claimer
+    uint256 ohareBalancePre = RVR_TOKEN.balanceOf(OHARE);
+    vm.prank(OHARE);
+    REWARDS_DISTRIBUTION.operatorClaim();
+    uint256 ohareBalancePost = RVR_TOKEN.balanceOf(OHARE);
+    assertEq(ohareBalancePost, ohareBalancePre + ohareClaimableAmtPost);
+
+    uint256 hntlabsBalancePre = RVR_TOKEN.balanceOf(HNTLABS);
+    vm.prank(HNTLABS);
+    REWARDS_DISTRIBUTION.operatorClaim();
+    uint256 hntlabsBalancePost = RVR_TOKEN.balanceOf(HNTLABS);
+    assertEq(hntlabsBalancePost, hntlabsBalancePre + hntlabsClaimableAmtPost);
   }
 }

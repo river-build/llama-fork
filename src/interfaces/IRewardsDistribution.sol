@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.0;
+pragma solidity 0.8.19;
 
 // interfaces
 
@@ -11,6 +11,7 @@ interface IRewardsDistributionBase {
   error RewardsDistribution_NoRewardsToClaim();
   error RewardsDistribution_InsufficientRewardBalance();
   error RewardsDistribution_InvalidOperator();
+  error RewardsDistribution_UnauthorizedOperatorClaimer();
   event RewardsDistributed(address operator, uint256 amount);
 }
 
@@ -50,4 +51,8 @@ interface IRewardsDistribution is IRewardsDistributionBase {
   function getWithdrawalRecipient() external view returns (address);
 
   function withdraw() external;
+
+  function mainnetClaimByAddress(address mainnetDelegatorToClaim) external;
+
+  function operatorClaimByAddress(address operatorAddress) external;
 }

@@ -43,7 +43,6 @@ contract DistributeRewardsScriptBase is LlamaBaseScript {
   }
 }
 
-
 /// @title Distribute Rewards Script
 /// @author Llama (devsdosomething@llama.xyz)
 /// @notice A script that gets the total rewards, transfers the amount to the rewards distributor,

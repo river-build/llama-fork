@@ -32,19 +32,11 @@ interface INodeOperatorBase {
   // =============================================================
   //                           Events
   // =============================================================
+
   event OperatorRegistered(address indexed operator);
-  event OperatorStatusChanged(
-    address indexed operator,
-    NodeOperatorStatus indexed newStatus
-  );
-  event OperatorCommissionChanged(
-    address indexed operator,
-    uint256 indexed commission
-  );
-  event OperatorClaimAddressChanged(
-    address indexed operator,
-    address indexed claimAddress
-  );
+  event OperatorStatusChanged(address indexed operator, NodeOperatorStatus indexed newStatus);
+  event OperatorCommissionChanged(address indexed operator, uint256 indexed commission);
+  event OperatorClaimAddressChanged(address indexed operator, address indexed claimAddress);
 }
 
 interface INodeOperator is INodeOperatorBase {
@@ -67,30 +59,20 @@ interface INodeOperator is INodeOperatorBase {
    * @param   operator Address of the operator.
    * @return  The status of the operator.
    */
-  function getOperatorStatus(
-    address operator
-  ) external view returns (NodeOperatorStatus);
+  function getOperatorStatus(address operator) external view returns (NodeOperatorStatus);
 
   /*
    * @notice  Sets the status of an operator.
    * @param   operator Address of the operator.
    */
-  function setOperatorStatus(
-    address operator,
-    NodeOperatorStatus newStatus
-  ) external;
+  function setOperatorStatus(address operator, NodeOperatorStatus newStatus) external;
 
   // =============================================================
   //                           Operator Information
   // =============================================================
-  function setClaimAddressForOperator(
-    address claimer,
-    address operator
-  ) external;
+  function setClaimAddressForOperator(address claimer, address operator) external;
 
-  function getClaimAddressForOperator(
-    address operator
-  ) external view returns (address);
+  function getClaimAddressForOperator(address operator) external view returns (address);
 
   function getOperators() external view returns (address[] memory);
 

@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.19;
+
 import "forge-std/console.sol";
 import {Test, console2} from "forge-std/Test.sol";
 
@@ -10,7 +11,10 @@ import {IOptimismMintableERC20} from "src/interfaces/IOptimismMintableERC20.sol"
 import {IRewardsDistribution} from "src/interfaces/IRewardsDistribution.sol";
 import {INodeOperator} from "src/interfaces/INodeOperator.sol";
 import {IMainnetDelegation, IMainnetDelegationBase} from "src/interfaces/IMainnetDelegation.sol";
-import {DistributeRewardsScriptBase, DistributeRewardsScriptBaseSepolia} from "src/llama-scripts/DistributeRewardsScript.sol";
+import {
+  DistributeRewardsScriptBase,
+  DistributeRewardsScriptBaseSepolia
+} from "src/llama-scripts/DistributeRewardsScript.sol";
 import {LlamaTestSetup} from "test/utils/LlamaTestSetup.sol";
 import {IERC20} from "@openzeppelin/token/ERC20/IERC20.sol";
 
@@ -52,7 +56,8 @@ contract DistributeRewardsTestSetupBase is LlamaTestSetup {
   /// @dev The Treasury Llama account address.
   address public constant RIVER_TREASURY = 0x8ee48C016b932A69779A25133b53F0fFf66C85C0;
   /// @dev The RVR ERC20 token address.
-  IOptimismMintableERC20 internal constant RVR_TOKEN = IOptimismMintableERC20(0x9172852305F32819469bf38A3772f29361d7b768);
+  IOptimismMintableERC20 internal constant RVR_TOKEN =
+    IOptimismMintableERC20(0x9172852305F32819469bf38A3772f29361d7b768);
 
   /// Base Registry Diamond
   address internal constant REGISTRY_DIAMOND = 0x7c0422b31401C936172C897802CF0373B35B7698;
@@ -82,6 +87,7 @@ contract DistributeRewardsTestSetupBase is LlamaTestSetup {
     address operatorClaimer;
     uint256 claimableAmtPost;
   }
+
   Operators[] internal baseOperators;
 
   function setUp() public override {
@@ -98,9 +104,8 @@ contract DistributeRewardsTestSetupBase is LlamaTestSetup {
 
   // Function to multiply a number by a decimal represented as an integer
   function multiplyByDecimal(uint256 number, uint256 decimalMultiplier) public pure returns (uint256) {
-        return (number * decimalMultiplier) / SCALING_FACTOR;
+    return (number * decimalMultiplier) / SCALING_FACTOR;
   }
-
 }
 
 contract DistributeRewardsBase is DistributeRewardsTestSetupBase {
@@ -249,7 +254,9 @@ contract DistributeRewardsBase is DistributeRewardsTestSetupBase {
     address hntlabsClaimer = NODE_OPERATOR.getClaimAddressForOperator(HNTLABS);
     console.log("hntlabsClaimer: ", hntlabsClaimer);
 
-    baseOperators.push(Operators(FRAMEWORK, "framework", frameworkCommissionRate, frameworkClaimer, frameworkClaimableAmtPost));
+    baseOperators.push(
+      Operators(FRAMEWORK, "framework", frameworkCommissionRate, frameworkClaimer, frameworkClaimableAmtPost)
+    );
     baseOperators.push(Operators(HANEDA, "haneda", hanedaCommissionRate, hanedaClaimer, hanedaClaimableAmtPost));
     baseOperators.push(Operators(OHARE, "ohare", ohareCommissionRate, ohareClaimer, ohareClaimableAmtPost));
     baseOperators.push(Operators(HNTLABS, "hntlabs", hntlabsCommissionRate, hntlabsClaimer, hntlabsClaimableAmtPost));
@@ -268,13 +275,13 @@ contract DistributeRewardsBase is DistributeRewardsTestSetupBase {
       REWARDS_DISTRIBUTION.operatorClaimByAddress(baseOperators[i].operator);
       uint256 claimerBalancePost = RVR_TOKEN.balanceOf(claimer);
       assertEq(claimerBalancePost, claimerBalancePre + claimableAmtPost);
-
     }
 
     // claim delegator rewards by operator's delegate address
     // get delegator claim addresses for each operator
     for (uint256 i = 0; i < baseOperators.length; i++) {
-      IMainnetDelegationBase.Delegation[] memory delegations = MAINNET_DELEGATION.getMainnetDelegationsByOperator(baseOperators[i].operator);
+      IMainnetDelegationBase.Delegation[] memory delegations =
+        MAINNET_DELEGATION.getMainnetDelegationsByOperator(baseOperators[i].operator);
       for (uint256 j = 0; j < delegations.length; j++) {
         address delegator = delegations[j].delegator;
         address claimer = MAINNET_DELEGATION.getAuthorizedClaimer(delegator);
@@ -288,8 +295,7 @@ contract DistributeRewardsBase is DistributeRewardsTestSetupBase {
         REWARDS_DISTRIBUTION.mainnetClaimByAddress(delegator);
         uint256 claimerBalancePost = RVR_TOKEN.balanceOf(claimer);
         assertEq(claimerBalancePost, claimerBalancePre + claimableAmt);
+      }
     }
-    }
-
   }
 }

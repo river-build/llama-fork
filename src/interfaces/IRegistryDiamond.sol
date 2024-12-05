@@ -27,4 +27,5 @@ interface IRegistryDiamond {
   function getPeriodDistributionAmount() external view returns (uint256);
   function distributeRewards(address operator) external;
   function diamondCut(FacetCut[] calldata facetCuts, address init, bytes calldata initPayload) external;
+  function notifyRewardAmount(uint256 reward) external;
 }

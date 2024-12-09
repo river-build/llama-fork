@@ -12,21 +12,16 @@ interface IRewardsDistributionBase {
   error RewardsDistribution_InsufficientRewardBalance();
   error RewardsDistribution_InvalidOperator();
   error RewardsDistribution_UnauthorizedOperatorClaimer();
+
   event RewardsDistributed(address operator, uint256 amount);
 }
 
 interface IRewardsDistribution is IRewardsDistributionBase {
-  function getClaimableAmountForOperator(
-    address addr
-  ) external view returns (uint256);
+  function getClaimableAmountForOperator(address addr) external view returns (uint256);
 
-  function getClaimableAmountForAuthorizedClaimer(
-    address addr
-  ) external view returns (uint256);
+  function getClaimableAmountForAuthorizedClaimer(address addr) external view returns (uint256);
 
-  function getClaimableAmountForDelegator(
-    address addr
-  ) external view returns (uint256);
+  function getClaimableAmountForDelegator(address addr) external view returns (uint256);
 
   function operatorClaim() external;
 

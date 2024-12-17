@@ -21,11 +21,7 @@ contract DistributeRewardsV2ScriptBase is LlamaBaseScript {
     uint256 rewardAmount = REGISTRY_DIAMOND.getPeriodRewardAmount();
 
     RIVER_TREASURY.transferERC20(
-      LlamaAccount.ERC20Data({
-        token: RVR_TOKEN,
-        recipient: address(REGISTRY_DIAMOND),
-        amount: rewardAmount
-      })
+      LlamaAccount.ERC20Data({token: RVR_TOKEN, recipient: address(REGISTRY_DIAMOND), amount: rewardAmount})
     );
 
     REGISTRY_DIAMOND.notifyRewardAmount(rewardAmount);
@@ -47,11 +43,7 @@ contract DistributeRewardsV2ScriptBaseSepolia is LlamaBaseScript {
     uint256 rewardAmount = REGISTRY_DIAMOND.getPeriodRewardAmount();
 
     RIVER_TREASURY.transferERC20(
-      LlamaAccount.ERC20Data({
-        token: RVR_TOKEN,
-        recipient: address(REGISTRY_DIAMOND),
-        amount: rewardAmount
-      })
+      LlamaAccount.ERC20Data({token: RVR_TOKEN, recipient: address(REGISTRY_DIAMOND), amount: rewardAmount})
     );
 
     REGISTRY_DIAMOND.notifyRewardAmount(rewardAmount);

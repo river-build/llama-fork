@@ -24,11 +24,7 @@ interface IMainnetDelegationBase {
   // =============================================================
   //                           Events
   // =============================================================
-  event DelegationSet(
-    address indexed delegator,
-    address indexed operator,
-    uint256 quantity
-  );
+  event DelegationSet(address indexed delegator, address indexed operator, uint256 quantity);
 
   event DelegationRemoved(address indexed delegator);
 
@@ -64,10 +60,7 @@ interface IMainnetDelegation is IMainnetDelegationBase {
    * @param delegators The delegator address
    * @param claimers The address the delegator is allowing to claim
    */
-  function setBatchAuthorizedClaimers(
-    address[] calldata delegators,
-    address[] calldata claimers
-  ) external;
+  function setBatchAuthorizedClaimers(address[] calldata delegators, address[] calldata claimers) external;
 
   /**
    * @notice Set delegation of a delegator to a operator
@@ -75,38 +68,28 @@ interface IMainnetDelegation is IMainnetDelegationBase {
    * @param operator The operator address to delegate to
    * @param quantity The quantity to delegate
    */
-  function setDelegation(
-    address delegator,
-    address operator,
-    uint256 quantity
-  ) external;
+  function setDelegation(address delegator, address operator, uint256 quantity) external;
 
   /**
    * @notice Get delegation of a delegator
    * @param delegator The delegator address
    * @return Delegation delegation struct
    */
-  function getDelegationByDelegator(
-    address delegator
-  ) external view returns (Delegation memory);
+  function getDelegationByDelegator(address delegator) external view returns (Delegation memory);
 
   /**
    * @notice Get delegation of a operator
    * @param operator The operator address
    * @return Delegation delegation struct
    */
-  function getMainnetDelegationsByOperator(
-    address operator
-  ) external view returns (Delegation[] memory);
+  function getMainnetDelegationsByOperator(address operator) external view returns (Delegation[] memory);
 
   /**
    * @notice Get delegated stake of a operator
    * @param operator The operator address
    * @return uint256 The delegated stake
    */
-  function getDelegatedStakeByOperator(
-    address operator
-  ) external view returns (uint256);
+  function getDelegatedStakeByOperator(address operator) external view returns (uint256);
 
   /**
    * @notice Set authorized claimer
